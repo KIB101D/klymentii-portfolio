@@ -24,7 +24,3 @@ Production build:
 ```bash
 npm run build
 ```
-
-## Font note
-
-The uploaded source referenced `public/fonts/helvetiker_bold.typeface.json`, but that binary asset was not attached. The engine first requests the local file and falls back to the official Three.js hosted copy. For a fully offline build, copy the original asset into `public/fonts/`.
