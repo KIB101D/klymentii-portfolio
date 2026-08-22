@@ -42,12 +42,6 @@ export interface IntroPlaybackContext {
   getSkipPromise: () => Promise<void>;
 }
 
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => {
-    window.setTimeout(resolve, ms);
-  });
-}
-
 export async function playIntro(context: IntroPlaybackContext): Promise<void> {
   /*
    * playIntro is the owner of the playback state.
