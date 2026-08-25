@@ -229,7 +229,7 @@ export function Board() {
         aria-hidden="true"
       />
       <aside
-        className={`panel ${activeMobile ? "is-open" : ""}`}
+        className={`panel ${activeMobile === "about" ? "panel--bottom" : "panel--right"} ${activeMobile ? "is-open" : ""}`}
         aria-hidden={!activeMobile}
       >
         <button
