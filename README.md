@@ -36,12 +36,3 @@ npm run build
 ## Font
 
 The intro expects `public/fonts/helvetiker_bold.typeface.json`. The original font asset was not included in the uploaded source files, so the engine first tries the local path and then falls back to the Three.js hosted copy. For a fully self-contained/offline deploy, add the original JSON font file to that local path.
-
-## Recommendation letters
-
-Copy the real files into `public/recommendations/` using these exact names:
-
-- `studentsabroad-en.pdf`
-- `studentsabroad-ua.pdf`
-- `dma-en.pdf`
-- `dma-ua.pdf`
