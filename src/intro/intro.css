@@ -31,7 +31,6 @@
   position: fixed;
   left: 50%;
   top: 50%;
-  margin-top: -25px;
   z-index: 1;
   transform: translate(-50%, -50%) rotate(-5deg) skewX(-4deg) scale(1);
   transform-origin: center center;
@@ -135,6 +134,8 @@
   font-size: 11px;
   letter-spacing: 0.04em;
   cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
   transition:
     color 0.2s ease,
     opacity 0.3s ease;
@@ -146,7 +147,7 @@
 }
 
 .intro-skip:focus-visible {
-  outline: 1px solid rgba(232, 163, 61, 0.5);
+  outline: 1px solid rgba(241, 238, 230, 0.35);
   outline-offset: 6px;
 }
 
@@ -163,10 +164,84 @@
   font-size: 12px;
 }
 
+.intro-skip-desktop {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.intro-skip-desktop-button {
+  display: inline-flex;
+}
+
+.intro-skip-touch-indicator {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 60;
+  width: 48px;
+  height: 48px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+
+.intro-skip-ring {
+  position: absolute;
+  inset: 0;
+  width: 48px;
+  height: 48px;
+  overflow: visible;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.intro-skip-track,
+.intro-skip-progress {
+  fill: none;
+  stroke-width: 10.5;
+}
+
+.intro-skip-track {
+  stroke: rgba(255, 255, 255, 0.24);
+}
+
+.intro-skip-progress {
+  stroke: rgba(255, 255, 255, 0.95);
+  stroke-linecap: butt;
+}
+
+.intro-skip-mobile-hint {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 60;
+  display: none;
+  color: rgba(241, 238, 230, 0.72);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
 @media (max-width: 600px) {
-  .intro-skip {
-    right: 18px;
-    bottom: 18px;
-    font-size: 10px;
+  .intro-skip-desktop-button {
+    display: none;
+  }
+
+  .intro-skip-touch-indicator.is-visible,
+  .intro-skip-touch-indicator.is-pressing {
+    display: flex;
+    opacity: 1;
+  }
+
+  .intro-skip-mobile-hint {
+    display: block;
   }
 }

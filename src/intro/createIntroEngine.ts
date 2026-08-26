@@ -6,7 +6,12 @@ import { buildLogo } from "./logo";
 import { ANIMATION } from "./animationConfig";
 import { createStoryboard, fitCameraToLogo, type Shot } from "./storyboard";
 import { playIntro } from "./playIntro";
-import { prepareStickerSizing, type StickerImpactRefs } from "./stickerImpact";
+import {
+  calculateThreeToStickerScale,
+  getLogoScreenCenter,
+  prepareStickerSizing,
+  type StickerImpactRefs,
+} from "./stickerImpact";
 
 export interface IntroEngineRefs {
   canvasHost: HTMLDivElement;
@@ -345,15 +350,80 @@ export function createIntroEngine(refs: IntroEngineRefs): IntroEngine {
       logo,
     ]);
 
-    logo.visible = false;
-    stopRenderer();
+    if (shots.length > 0 && logoBounds) {
+      const finalShot = shots[shots.length - 1];
 
-    prepareStickerSizing(refs.stickerLogo);
-    refs.sticker.style.left = "50%";
-    refs.sticker.style.top = "50%";
+      controls.setLookAt(
+        finalShot.end.position.x,
+        finalShot.end.position.y,
+        finalShot.end.position.z,
+        finalShot.end.target.x,
+        finalShot.end.target.y,
+        finalShot.end.target.z,
+        false,
+      );
 
-    gsap.set(refs.cut, { opacity: 0 });
-    gsap.set(refs.flash, { opacity: 0 });
+      // Ensure camera matrices contain the final camera state
+      // before projecting the 3D logo into screen coordinates.
+      controls.update(0);
+      camera.updateProjectionMatrix();
+      camera.updateMatrixWorld(true);
+
+      logo.visible = true;
+
+      gsap.set(logo, {
+        opacity: 1,
+        scaleX: 1,
+        scaleY: 1,
+        scaleZ: 1,
+      });
+
+      const stickerRefs = getStickerRefs();
+
+      prepareStickerSizing(refs.stickerLogo);
+
+      const target = getLogoScreenCenter(stickerRefs);
+
+      refs.sticker.style.left = `${target.x}px`;
+      refs.sticker.style.top = `${target.y}px`;
+
+      // Match the same center correction used during the normal intro.
+      const rect = refs.stickerLogo.getBoundingClientRect();
+
+      const stickerCenterX = rect.left + rect.width / 2;
+      const stickerCenterY = rect.top + rect.height / 2;
+
+      const correctionX = target.x - stickerCenterX;
+      const correctionY = target.y - stickerCenterY;
+
+      const currentLeft = Number.parseFloat(refs.sticker.style.left || "0");
+
+      const currentTop = Number.parseFloat(refs.sticker.style.top || "0");
+
+      refs.sticker.style.left = `${currentLeft + correctionX}px`;
+      refs.sticker.style.top = `${currentTop + correctionY}px`;
+
+      const finalScale = calculateThreeToStickerScale(stickerRefs);
+
+      if (finalScale > 0 && Number.isFinite(finalScale)) {
+        threeToStickerScale = finalScale;
+      }
+    } else {
+      // Fallback only if skip happens before intro initialization.
+      prepareStickerSizing(refs.stickerLogo);
+
+      refs.sticker.style.left = "50%";
+      refs.sticker.style.top = `calc(50% + ${ANIMATION.position.yOffset}px)`;
+    }
+
+    gsap.set(refs.cut, {
+      opacity: 0,
+    });
+
+    gsap.set(refs.flash, {
+      opacity: 0,
+    });
+
     gsap.set(refs.sticker, {
       opacity: 1,
       x: "-50%",
@@ -362,7 +432,12 @@ export function createIntroEngine(refs: IntroEngineRefs): IntroEngine {
       rotation: ANIMATION.sticker.finalRotation,
       filter: "blur(0px) brightness(1)",
     });
-    gsap.set(refs.stickerLogo, { scaleX: 1, scaleY: 1 });
+
+    gsap.set(refs.stickerLogo, {
+      scaleX: 1,
+      scaleY: 1,
+    });
+
     gsap.set(refs.stickerShadow, {
       x: ANIMATION.shadow.finalX,
       y: ANIMATION.shadow.finalY,
@@ -370,8 +445,17 @@ export function createIntroEngine(refs: IntroEngineRefs): IntroEngine {
       opacity: ANIMATION.shadow.finalOpacity,
       filter: "blur(1px)",
     });
-    gsap.set(refs.dust, { opacity: 0, scale: 0 });
+
+    gsap.set(refs.dust, {
+      opacity: 0,
+      scale: 0,
+    });
+
     refs.dust.innerHTML = "";
+
+    logo.visible = false;
+
+    stopRenderer();
 
     completeIntro();
   }

@@ -32,7 +32,11 @@ const dictionaries = {
         contacts: "Contacts",
       },
     },
-    intro: { skip: "to skip intro", skipAria: "Skip intro" },
+    intro: {
+      skip: "to skip intro",
+      skipHold: "HOLD TO SKIP",
+      skipAria: "Skip intro",
+    },
     about: {
       eyebrow: "About",
       bio: "Frontend Developer with commercial experience building and maintaining web applications with React, Next.js and TypeScript. Experienced in working with existing codebases, REST APIs, component architecture, state management, and edge cases. I focus on building frontend features that remain understandable and maintainable as the product grows.",
@@ -107,7 +111,11 @@ const dictionaries = {
         contacts: "Контакти",
       },
     },
-    intro: { skip: "щоб пропустити intro", skipAria: "Пропустити intro" },
+    intro: {
+      skip: "щоб пропустити intro",
+      skipHold: "ЗАТИСНИ, ЩОБ ПРОПУСТИТИ",
+      skipAria: "Пропустити intro",
+    },
     about: {
       eyebrow: "Про мене",
       bio: "Frontend Developer із комерційним досвідом розробки та підтримки web-застосунків на React, Next.js і TypeScript. Маю досвід роботи з існуючими codebase, REST API, компонентною архітектурою, керуванням станом та edge cases. Фокусуюсь на створенні frontend-функціональності, яку легко розуміти й підтримувати в міру розвитку продукту.",
@@ -182,7 +190,11 @@ const dictionaries = {
         contacts: "Kontakt",
       },
     },
-    intro: { skip: "aby pominąć intro", skipAria: "Pomiń intro" },
+    intro: {
+      skip: "aby pominąć intro",
+      skipHold: "PRZYTRZYMAJ, ABY POMINĄĆ",
+      skipAria: "Pomiń intro",
+    },
     about: {
       eyebrow: "O mnie",
       bio: "Frontend Developer z doświadczeniem komercyjnym w tworzeniu i rozwijaniu aplikacji webowych z wykorzystaniem React, Next.js i TypeScript. Mam doświadczenie w pracy z istniejącymi codebase’ami, REST API, architekturą komponentów, zarządzaniem stanem i obsługą edge case’ów. Skupiam się na tworzeniu funkcjonalności frontendu, które pozostają czytelne i łatwe w utrzymaniu wraz z rozwojem produktu.",
