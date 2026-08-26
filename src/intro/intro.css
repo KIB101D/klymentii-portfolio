@@ -1,5 +1,8 @@
 .intro-scene canvas {
   display: block;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
   width: 100%;
   height: 100%;
 }

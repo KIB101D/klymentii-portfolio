@@ -2,6 +2,10 @@
 
 Merged portfolio with a persistent Three.js / GSAP intro layer and the interactive portfolio board above it.
 
+## Demo
+
+[Link](https://klymentii-portfolio.vercel.app/)
+
 ## What is included
 
 - Three.js + GSAP intro moved into an imperative engine factory with closure state.
