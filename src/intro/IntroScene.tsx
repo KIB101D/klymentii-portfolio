@@ -94,7 +94,6 @@ export function IntroScene({
 
       const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === "Enter" || event.key === "Escape") {
-          event.preventDefault();
           handleSkip();
         }
       };
@@ -193,9 +192,6 @@ export function IntroScene({
       if (event.pointerType === "mouse") return;
       if (holding) return;
 
-      event.preventDefault();
-      event.stopPropagation();
-
       activePointerId = event.pointerId;
       completedByHold = false;
       holding = true;
@@ -215,8 +211,6 @@ export function IntroScene({
       if (!holding || event.pointerId !== activePointerId) {
         return;
       }
-
-      event.preventDefault();
 
       if (!completedByHold) {
         resetProgress();

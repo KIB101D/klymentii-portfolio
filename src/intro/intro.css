@@ -3,7 +3,6 @@
   user-select: none;
   -webkit-touch-callout: none;
   -webkit-user-drag: none;
-  touch-action: none;
 }
 
 .intro-scene canvas {
