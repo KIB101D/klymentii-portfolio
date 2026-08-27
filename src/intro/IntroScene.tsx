@@ -194,6 +194,7 @@ export function IntroScene({
       if (holding) return;
 
       event.preventDefault();
+      event.stopPropagation();
 
       activePointerId = event.pointerId;
       completedByHold = false;

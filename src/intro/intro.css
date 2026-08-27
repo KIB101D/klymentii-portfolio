@@ -1,10 +1,18 @@
-.intro-scene canvas {
-  display: block;
+.intro-scene {
   -webkit-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+  touch-action: none;
+}
+
+.intro-scene canvas {
+  display: block;
   width: 100%;
   height: 100%;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .intro-cut {
@@ -39,6 +47,10 @@
   transform-origin: center center;
   opacity: 0;
   pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
   will-change: transform, opacity, filter;
 }
 
@@ -53,6 +65,10 @@
   filter: blur(1px);
   z-index: 0;
   pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
   will-change: transform, opacity, filter;
 }
 
@@ -73,6 +89,10 @@
     4px 12px 0 #151515,
     5px 15px 0 #151515;
   filter: contrast(1.05);
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
   will-change: transform, filter;
 }
 
@@ -112,6 +132,9 @@
   background: #555;
   box-shadow: 0 0 3px rgba(90, 90, 90, 0.35);
   pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
   will-change: transform, opacity;
 }
 
@@ -138,6 +161,9 @@
   letter-spacing: 0.04em;
   cursor: pointer;
   touch-action: manipulation;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
   transition:
     color 0.2s ease,
@@ -190,6 +216,10 @@
   pointer-events: none;
   transform: translate(-50%, -50%);
   opacity: 0;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
 }
 
 .intro-skip-ring {
@@ -231,6 +261,9 @@
   text-transform: uppercase;
   white-space: nowrap;
   pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 @media (max-width: 600px) {
