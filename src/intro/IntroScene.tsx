@@ -126,7 +126,7 @@ export function IntroScene({
       ".intro-skip-progress",
     );
 
-    const HOLD_DURATION = 900;
+    const HOLD_DURATION = 700;
     const radius = 20;
     const circumference = 2 * Math.PI * radius;
 
