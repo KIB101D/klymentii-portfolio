@@ -26,6 +26,7 @@ export function IntroScene({
 
   const skipRef = useRef<HTMLButtonElement>(null);
   const skipIndicatorRef = useRef<HTMLDivElement>(null);
+  const skipTouchLayerRef = useRef<HTMLDivElement>(null);
 
   const onFinishedRef = useRef(onFinished);
 
@@ -115,7 +116,9 @@ export function IntroScene({
      * - indicator appears exactly at touch point
      * - hold to fill the ring
      */
-    if (!indicator) {
+    const touchLayer = skipTouchLayerRef.current;
+
+    if (!indicator || !touchLayer) {
       return () => engine.dispose();
     }
 
@@ -131,7 +134,7 @@ export function IntroScene({
     let holdFrame: number | null = null;
     let holding = false;
     let completedByHold = false;
-    let activePointerId: number | null = null;
+    let activeTouchId: number | null = null;
 
     const hideIndicator = () => {
       indicator.classList.remove("is-visible", "is-pressing");
@@ -144,7 +147,7 @@ export function IntroScene({
 
     const resetProgress = () => {
       holding = false;
-      activePointerId = null;
+      activeTouchId = null;
       completedByHold = false;
 
       if (holdFrame !== null) {
@@ -168,7 +171,7 @@ export function IntroScene({
       if (ratio >= 1) {
         completedByHold = true;
         holding = false;
-        activePointerId = null;
+        activeTouchId = null;
         holdFrame = null;
 
         hideIndicator();
@@ -188,16 +191,20 @@ export function IntroScene({
       indicator.setAttribute("aria-hidden", "false");
     };
 
-    const handlePointerDown = (event: PointerEvent) => {
-      if (event.pointerType === "mouse") return;
+    const handleTouchStart = (event: TouchEvent) => {
       if (holding) return;
 
-      activePointerId = event.pointerId;
+      const touch = event.changedTouches[0];
+      if (!touch) return;
+
+      event.preventDefault();
+
+      activeTouchId = touch.identifier;
       completedByHold = false;
       holding = true;
       holdStart = performance.now();
 
-      showIndicatorAt(event.clientX, event.clientY);
+      showIndicatorAt(touch.clientX, touch.clientY);
 
       if (progress) {
         progress.style.strokeDasharray = `${circumference}`;
@@ -207,8 +214,13 @@ export function IntroScene({
       holdFrame = requestAnimationFrame(updateProgress);
     };
 
-    const handlePointerUp = (event: PointerEvent) => {
-      if (!holding || event.pointerId !== activePointerId) {
+    const findActiveTouch = (event: TouchEvent) =>
+      Array.from(event.changedTouches).find(
+        (touch) => touch.identifier === activeTouchId,
+      );
+
+    const handleTouchEnd = (event: TouchEvent) => {
+      if (!holding || !findActiveTouch(event)) {
         return;
       }
 
@@ -217,12 +229,17 @@ export function IntroScene({
       }
     };
 
-    const handlePointerCancel = (event: PointerEvent) => {
-      if (!holding || event.pointerId !== activePointerId) {
+    const handleTouchCancel = (event: TouchEvent) => {
+      if (!holding || !findActiveTouch(event)) {
         return;
       }
 
       resetProgress();
+    };
+
+    // Defensive: guards Android-style long-press context menus too.
+    const handleContextMenu = (event: Event) => {
+      event.preventDefault();
     };
 
     const handleVisibilityChange = () => {
@@ -231,24 +248,29 @@ export function IntroScene({
       }
     };
 
-    window.addEventListener("pointerdown", handlePointerDown, {
+    touchLayer.addEventListener("touchstart", handleTouchStart, {
       passive: false,
     });
 
-    window.addEventListener("pointerup", handlePointerUp, {
+    touchLayer.addEventListener("touchend", handleTouchEnd, {
       passive: false,
     });
 
-    window.addEventListener("pointercancel", handlePointerCancel);
+    touchLayer.addEventListener("touchcancel", handleTouchCancel, {
+      passive: false,
+    });
+
+    touchLayer.addEventListener("contextmenu", handleContextMenu);
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
       resetProgress();
 
-      window.removeEventListener("pointerdown", handlePointerDown);
-      window.removeEventListener("pointerup", handlePointerUp);
-      window.removeEventListener("pointercancel", handlePointerCancel);
+      touchLayer.removeEventListener("touchstart", handleTouchStart);
+      touchLayer.removeEventListener("touchend", handleTouchEnd);
+      touchLayer.removeEventListener("touchcancel", handleTouchCancel);
+      touchLayer.removeEventListener("contextmenu", handleContextMenu);
 
       document.removeEventListener("visibilitychange", handleVisibilityChange);
 
@@ -292,6 +314,12 @@ export function IntroScene({
               <span>{t.intro.skip}</span>
             </span>
           </button>
+
+          <div
+            ref={skipTouchLayerRef}
+            className="intro-skip-touch-layer"
+            aria-hidden="true"
+          />
 
           <div
             ref={skipIndicatorRef}

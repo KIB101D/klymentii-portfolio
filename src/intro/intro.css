@@ -202,6 +202,20 @@
   display: inline-flex;
 }
 
+.intro-skip-touch-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+  /* Desktop: never intercepts pointer events. */
+  pointer-events: none;
+}
+
 .intro-skip-touch-indicator {
   position: fixed;
   left: 0;
@@ -268,6 +282,11 @@
 @media (max-width: 600px) {
   .intro-skip-desktop-button {
     display: none;
+  }
+
+  /* Mobile only: this is what actually receives the touch. */
+  .intro-skip-touch-layer {
+    pointer-events: auto;
   }
 
   .intro-skip-touch-indicator.is-visible,
