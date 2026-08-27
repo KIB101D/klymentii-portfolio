@@ -82,11 +82,11 @@
   color: #404040;
   -webkit-text-stroke: 3px #171717;
   text-shadow:
-    1px 3px 0 #151515,
-    2px 6px 0 #151515,
-    3px 9px 0 #151515,
-    4px 12px 0 #151515,
-    5px 15px 0 #151515;
+    0.0065em 0.019em 0 #151515,
+    0.013em 0.039em 0 #151515,
+    0.019em 0.058em 0 #151515,
+    0.026em 0.077em 0 #151515,
+    0.032em 0.097em 0 #151515;
   filter: contrast(1.05);
   -webkit-user-select: none;
   user-select: none;
