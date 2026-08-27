@@ -140,6 +140,8 @@
 @media (max-width: 600px) {
   .intro-sticker-logo {
     font-size: clamp(64px, 17vw, 110px);
+    letter-spacing: -0.04em;
+    -webkit-text-stroke: 2px #171717;
   }
 }
 

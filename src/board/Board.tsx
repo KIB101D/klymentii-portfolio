@@ -10,18 +10,41 @@ import { useI18n } from "../i18n";
 import "./board.css";
 
 const NODE_CONFIG = [
-  { id: "about", float: { x: 14, y: -18, duration: "11s", delay: "0s" } },
+  {
+    id: "about",
+    float: {
+      x: 14,
+      y: -18,
+      duration: "11s",
+      delay: "0s",
+    },
+  },
   {
     id: "experience",
-    float: { x: -16, y: 14, duration: "13s", delay: "1.4s" },
+    float: {
+      x: -16,
+      y: 14,
+      duration: "13s",
+      delay: "1.4s",
+    },
   },
   {
     id: "projects",
-    float: { x: 13, y: 17, duration: "9.5s", delay: "0.8s" },
+    float: {
+      x: 13,
+      y: 17,
+      duration: "9.5s",
+      delay: "0.8s",
+    },
   },
   {
     id: "contacts",
-    float: { x: -14, y: -12, duration: "12s", delay: "2.1s" },
+    float: {
+      x: -14,
+      y: -12,
+      duration: "12s",
+      delay: "2.1s",
+    },
   },
 ] as const;
 
@@ -55,13 +78,20 @@ export function Board() {
   ]);
 
   const [headerVisible, setHeaderVisible] = useState(false);
+
   const [quicklinksVisible, setQuicklinksVisible] = useState(false);
+
   const [coordsVisible, setCoordsVisible] = useState(false);
+
   const [hintVisible, setHintVisible] = useState(false);
 
   const [activeMobile, setActiveMobile] = useState<NodeKey | null>(null);
+
   const [openPopovers, setOpenPopovers] = useState<NodeKey[]>([]);
+
   const [popoverZ, setPopoverZ] = useState(20);
+
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
 
   const isDesktop = () => window.matchMedia("(min-width: 641px)").matches;
 
@@ -121,6 +151,8 @@ export function Board() {
         setOpenPopovers([]);
         setActiveMobile(null);
       }
+
+      setLanguageMenuOpen(false);
     };
 
     window.addEventListener("resize", handleResize);
@@ -143,10 +175,30 @@ export function Board() {
       setOpenPopovers([]);
     };
 
+    const handleLanguageOutsideClick = (event: MouseEvent) => {
+      if (!languageMenuOpen || isDesktop()) {
+        return;
+      }
+
+      const target = event.target as HTMLElement | null;
+
+      if (target?.closest(".locale-switcher")) {
+        return;
+      }
+
+      setLanguageMenuOpen(false);
+    };
+
     document.addEventListener("click", handleOutsideClick);
 
-    return () => document.removeEventListener("click", handleOutsideClick);
-  }, [openPopovers.length]);
+    document.addEventListener("click", handleLanguageOutsideClick);
+
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+
+      document.removeEventListener("click", handleLanguageOutsideClick);
+    };
+  }, [openPopovers.length, languageMenuOpen]);
 
   useEffect(() => {
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -156,6 +208,7 @@ export function Board() {
 
       setOpenPopovers([]);
       setActiveMobile(null);
+      setLanguageMenuOpen(false);
     };
 
     document.addEventListener("keydown", closeOnEscape);
@@ -217,18 +270,53 @@ export function Board() {
 
         <a href="mailto:boiko.klymentii.ua@gmail.com">{t.board.quickEmail}</a>
 
-        <div className="locale-switcher" aria-label="Language">
-          {(["en", "uk", "pl"] as const).map((item) => (
-            <button
-              key={item}
-              className={locale === item ? "is-active" : ""}
-              type="button"
-              onClick={() => setLocale(item)}
-              aria-pressed={locale === item}
-            >
-              {item.toUpperCase()}
-            </button>
-          ))}
+        <div
+          className={`locale-switcher ${languageMenuOpen ? "is-open" : ""}`}
+          aria-label="Language"
+        >
+          <div className="locale-desktop-options">
+            {(["en", "uk", "pl"] as const).map((item) => (
+              <button
+                key={item}
+                className={locale === item ? "is-active" : ""}
+                type="button"
+                onClick={() => setLocale(item)}
+                aria-pressed={locale === item}
+              >
+                {item.toUpperCase()}
+              </button>
+            ))}
+          </div>
+
+          <button
+            className="locale-mobile-trigger"
+            type="button"
+            aria-label="Select language"
+            aria-expanded={languageMenuOpen}
+            onClick={() => setLanguageMenuOpen((open) => !open)}
+          >
+            {locale.toUpperCase()}
+          </button>
+
+          <div
+            className="locale-mobile-options"
+            aria-hidden={!languageMenuOpen}
+          >
+            {(["en", "uk", "pl"] as const).map((item) => (
+              <button
+                key={item}
+                className={locale === item ? "is-active" : ""}
+                type="button"
+                tabIndex={languageMenuOpen ? 0 : -1}
+                onClick={() => {
+                  setLocale(item);
+                  setLanguageMenuOpen(false);
+                }}
+              >
+                {item.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
       </nav>
 
@@ -288,7 +376,6 @@ export function Board() {
         aria-hidden="true"
       />
 
-      {/* ABOUT — opens from the bottom */}
       <aside
         className={`panel panel--bottom ${
           activeMobile === "about" ? "is-open" : ""
@@ -309,7 +396,6 @@ export function Board() {
         </div>
       </aside>
 
-      {/* EXPERIENCE / PROJECTS / CONTACTS — open from the right */}
       <aside
         className={`panel panel--right ${
           activeMobile && activeMobile !== "about" ? "is-open" : ""

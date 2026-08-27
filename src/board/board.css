@@ -23,7 +23,6 @@
   inset: 0;
   width: 100%;
   height: 100vh;
-  height: 100dvh;
   overflow: hidden;
   z-index: 10;
   background: transparent;
@@ -273,6 +272,7 @@
 @media (prefers-reduced-motion: no-preference) {
   .node-float {
     animation: floatMove var(--fdur, 10s) ease-in-out infinite;
+
     animation-delay: var(--fdelay, 0s);
   }
 }
@@ -350,6 +350,7 @@
 
 .node:focus-visible .node-core {
   outline: 2px solid var(--accent);
+
   outline-offset: 4px;
 }
 
@@ -383,23 +384,23 @@
    ========================================================= */
 
 .node--about {
-  --x: 21%;
-  --y: 76%;
+  --x: 19%;
+  --y: 70%;
 }
 
 .node--experience {
-  --x: 34%;
-  --y: 40%;
+  --x: 32%;
+  --y: 34%;
 }
 
 .node--projects {
-  --x: 57%;
-  --y: 72%;
+  --x: 55%;
+  --y: 66%;
 }
 
 .node--contacts {
-  --x: 82%;
-  --y: 48%;
+  --x: 80%;
+  --y: 42%;
 }
 
 /* =========================================================
@@ -411,6 +412,7 @@
   inset: 0;
 
   background: rgba(17, 17, 17, 0.6);
+
   backdrop-filter: blur(6px);
 
   opacity: 0;
@@ -438,7 +440,6 @@
   z-index: 7;
 }
 
-/* Slides in from the right — used for experience / projects / contacts. */
 .panel--right {
   top: 0;
   right: 0;
@@ -457,7 +458,6 @@
   transform: translateX(0);
 }
 
-/* Slides up from the bottom — used for about. */
 .panel--bottom {
   top: auto;
   bottom: 0;
@@ -469,6 +469,7 @@
   max-height: 82vh;
 
   border-top: 1px solid var(--border);
+
   border-radius: 20px 20px 0 0;
 
   padding: 44px 24px 28px;
@@ -492,6 +493,7 @@
   border-radius: 50%;
 
   background: var(--bg-panel-elevated);
+
   border: 1px solid var(--border);
 
   color: var(--text-muted);
@@ -510,6 +512,7 @@
 
 .panel-close:hover {
   color: var(--text);
+
   border-color: var(--accent-dim);
 }
 
@@ -531,6 +534,7 @@
 
   width: 320px;
   max-width: calc(100vw - 32px);
+
   max-height: min(72vh, 540px);
 
   overflow-y: auto;
@@ -540,6 +544,7 @@
   background: var(--bg-panel);
 
   border: 1px solid var(--border);
+
   border-radius: 16px;
 
   padding: 44px 22px 22px;
@@ -559,6 +564,7 @@
 
 .node-popover.is-open {
   opacity: 1;
+
   transform: scale(1) translateY(0);
 }
 
@@ -574,6 +580,7 @@
   border-radius: 50%;
 
   background: var(--bg-panel-elevated);
+
   border: 1px solid var(--border);
 
   color: var(--text-muted);
@@ -592,6 +599,7 @@
 
 .popover-close:hover {
   color: var(--text);
+
   border-color: var(--accent-dim);
 }
 
@@ -601,11 +609,13 @@
 
 .eyebrow {
   font-family: "JetBrains Mono", monospace;
+
   font-size: 12px;
 
   color: var(--accent);
 
   letter-spacing: 0.08em;
+
   text-transform: uppercase;
 
   margin: 0 0 18px;
@@ -622,11 +632,13 @@
   justify-content: center;
 
   background: var(--accent-soft);
+
   border: 1px solid var(--accent-dim);
 
   color: var(--accent);
 
   font-family: "JetBrains Mono", monospace;
+
   font-size: 18px;
 
   margin-bottom: 20px;
@@ -649,6 +661,7 @@
 
 .pill {
   font-family: "JetBrains Mono", monospace;
+
   font-size: 11.5px;
 
   padding: 6px 11px;
@@ -656,6 +669,7 @@
   border-radius: 999px;
 
   background: var(--bg-panel-elevated);
+
   border: 1px solid var(--border);
 
   color: var(--text-muted);
@@ -705,6 +719,7 @@
   display: block;
 
   font-family: "JetBrains Mono", monospace;
+
   font-size: 11.5px;
 
   color: var(--text-muted);
@@ -716,6 +731,7 @@
   display: block;
 
   font-family: "Space Grotesk", sans-serif;
+
   font-weight: 600;
   font-size: 15px;
 
@@ -740,6 +756,7 @@
   min-width: 0;
 
   font-size: 13.5px;
+
   color: var(--text-muted);
 
   white-space: nowrap;
@@ -760,6 +777,7 @@
   flex-shrink: 0;
 
   font-family: "JetBrains Mono", monospace;
+
   font-size: 10px;
 
   white-space: nowrap;
@@ -767,6 +785,7 @@
 
 .tl-recommendation-label {
   color: var(--text-muted);
+
   opacity: 0.62;
 
   transition:
@@ -785,6 +804,7 @@
   padding: 0 6px;
 
   border: 1px solid transparent;
+
   border-radius: 6px;
 
   color: var(--text-muted);
@@ -812,6 +832,7 @@
 
 .tl-org-row:hover .tl-recommendation-label {
   color: var(--text);
+
   opacity: 0.9;
 }
 
@@ -838,6 +859,7 @@
   border-radius: 12px;
 
   background: var(--bg-panel-elevated);
+
   border: 1px solid var(--border);
 
   text-decoration: none;
@@ -849,11 +871,13 @@
 
 .project-card:hover {
   border-color: var(--accent-dim);
+
   transform: translateY(-2px);
 }
 
 .pc-name {
   font-family: "Space Grotesk", sans-serif;
+
   font-weight: 600;
   font-size: 14px;
 
@@ -862,6 +886,7 @@
 
 .pc-tag {
   font-family: "JetBrains Mono", monospace;
+
   font-size: 11px;
 
   color: var(--accent);
@@ -878,6 +903,7 @@
   gap: 10px;
 
   font-family: "JetBrains Mono", monospace;
+
   font-size: 12.5px;
 
   color: var(--text-muted);
@@ -929,6 +955,7 @@
   padding: 14px 2px;
 
   border: none;
+
   border-bottom: 1px solid var(--border);
 
   background: none;
@@ -970,11 +997,13 @@
   flex-shrink: 0;
 
   background: var(--accent-soft);
+
   border: 1px solid var(--accent-dim);
 
   color: var(--accent);
 
   font-family: "JetBrains Mono", monospace;
+
   font-size: 10.5px;
   font-weight: 600;
 }
@@ -988,11 +1017,13 @@
 
 .channel-label {
   font-family: "JetBrains Mono", monospace;
+
   font-size: 10.5px;
 
   color: var(--text-muted);
 
   text-transform: uppercase;
+
   letter-spacing: 0.06em;
 }
 
@@ -1013,6 +1044,7 @@
   margin-left: auto;
 
   font-family: "JetBrains Mono", monospace;
+
   font-size: 11px;
 
   color: var(--text-muted);
@@ -1039,14 +1071,23 @@
    ========================================================= */
 
 .locale-switcher {
+  position: relative;
+
   display: inline-flex;
   align-items: center;
+
   gap: 6px;
 
   margin-left: 2px;
   padding-left: 14px;
 
   border-left: 1px solid var(--border);
+}
+
+.locale-desktop-options {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .locale-switcher button {
@@ -1060,7 +1101,7 @@
   cursor: pointer;
 
   font: inherit;
-  font-size: 15px;
+  font-size: 12px;
   letter-spacing: 0.04em;
 }
 
@@ -1072,7 +1113,13 @@
 
 .locale-switcher button:focus-visible {
   outline: 1px solid var(--accent-dim);
+
   outline-offset: 4px;
+}
+
+.locale-mobile-trigger,
+.locale-mobile-options {
+  display: none;
 }
 
 /* =========================================================
@@ -1116,11 +1163,13 @@
     right: auto;
 
     gap: 14px;
+
     flex-wrap: wrap;
   }
 
   .quicklinks .locale-switcher {
     position: fixed;
+
     top: 24px;
     right: 24px;
     left: auto;
@@ -1132,6 +1181,119 @@
     border-left: 0;
 
     z-index: 5;
+
+    gap: 0;
+  }
+
+  .quicklinks .locale-desktop-options {
+    display: none;
+  }
+
+  /* Closed mobile state:
+     just the current language. */
+  .quicklinks .locale-mobile-trigger {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    padding: 0;
+
+    background: transparent;
+
+    color: var(--text-muted);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 11px;
+    line-height: 1;
+
+    letter-spacing: 0.04em;
+
+    min-width: auto;
+    min-height: auto;
+
+    transition: color 0.2s ease;
+  }
+
+  .quicklinks .locale-mobile-trigger:hover,
+  .quicklinks .locale-mobile-trigger:focus-visible,
+  .quicklinks .locale-switcher.is-open .locale-mobile-trigger {
+    color: var(--accent);
+  }
+
+  .quicklinks .locale-mobile-trigger:focus-visible {
+    outline: none;
+  }
+
+  /* Closed: hidden.
+     Open: the other languages unfold horizontally
+     from the current language. */
+  .quicklinks .locale-mobile-options {
+    display: flex;
+    align-items: center;
+
+    gap: 0;
+
+    max-width: 0;
+    overflow: hidden;
+
+    opacity: 0;
+
+    transform: translateX(-4px);
+
+    pointer-events: none;
+
+    transition:
+      max-width 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+      opacity 0.18s ease,
+      transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+
+  .quicklinks .locale-switcher.is-open .locale-mobile-options {
+    max-width: 90px;
+    margin-left: 10px;
+
+    opacity: 1;
+
+    transform: translateX(0);
+
+    pointer-events: auto;
+  }
+
+  .quicklinks .locale-mobile-options button {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    padding: 0;
+
+    min-width: 22px;
+    min-height: 22px;
+
+    background: transparent;
+
+    color: var(--text-muted);
+
+    font-family: "JetBrains Mono", monospace;
+
+    font-size: 11px;
+    line-height: 1;
+
+    letter-spacing: 0.04em;
+  }
+
+  .quicklinks .locale-mobile-options button:hover,
+  .quicklinks .locale-mobile-options button:focus-visible,
+  .quicklinks .locale-mobile-options button.is-active {
+    color: var(--accent);
+  }
+
+  .quicklinks .locale-mobile-options button:focus-visible {
+    outline: none;
   }
 
   .coords {
@@ -1157,6 +1319,7 @@
 
   .tl-org-row {
     align-items: flex-start;
+
     flex-direction: column;
 
     gap: 5px;
