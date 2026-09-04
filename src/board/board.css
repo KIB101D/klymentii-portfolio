@@ -1058,12 +1058,6 @@
   flex-shrink: 0;
 }
 
-.channel-row:hover .channel-hint,
-.channel-row:focus-visible .channel-hint,
-.channel-row.is-copied .channel-hint {
-  opacity: 1;
-}
-
 .channel-row.is-copied .channel-hint {
   color: var(--accent);
 }
