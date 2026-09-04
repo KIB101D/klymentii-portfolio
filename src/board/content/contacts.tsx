@@ -67,7 +67,7 @@ export function ContactsContent() {
           <span className="channel-tag">@</span>
           <span className="channel-body">
             <span className="channel-label">Email</span>
-            <span className="channel-value">boiko.klymentii.ua@gmail.com</span>
+            <span className="channel-value">boiko.klymentii.ua</span>
           </span>
           <span className="channel-hint">
             {copied ? t.board.copied : t.board.copy}

@@ -431,6 +431,7 @@
 
 .panel {
   position: fixed;
+  box-sizing: border-box;
 
   background: var(--bg-panel);
 
