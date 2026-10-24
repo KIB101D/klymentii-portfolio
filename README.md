@@ -1,42 +1,37 @@
-# Klymentii Portfolio — Vite + React + TypeScript + Tailwind CSS
+# klymentii-portfolio
 
-Merged portfolio with a persistent Three.js / GSAP intro layer and the interactive portfolio board above it.
+Personal portfolio of Klymentii Boiko, Frontend / Product Engineer.
+Live: https://klymentii-portfolio.vercel.app
 
-## Demo
+## Stack
 
-[Link](https://klymentii-portfolio.vercel.app/)
+Next.js 16 (App Router, static generation) · TypeScript strict · Tailwind CSS 4 · Vercel Analytics.
+Three.js is loaded only for the hero intro and the project objects, after the page has painted.
 
-## What is included
+## Structure
 
-- Three.js + GSAP intro moved into an imperative engine factory with closure state.
-- Render RAF runs during the intro and stops after the final sticker impact.
-- `IntroScene` uses a stable `useEffect(..., [])` lifecycle for the engine while its DOM remains mounted as the visual base layer.
-- Intro can be skipped with click, Enter, or Escape.
-- `sessionStorage` remembers that the intro has been seen for the current browser session.
-- Final CSS sticker stays visible underneath the Board.
-- Old CSS-only intro, old watermark, Replay button, and debug UI were removed.
-- Board is localized with EN as the default and UA / PL as persistent language options. The locale is stored in `localStorage`.
-- Recommendations UI is present for StudentsAbroad and DMA with EN / UA document slots. No recommendation text or fake documents were invented because the original letters were not included among the provided source files.
-
-## Run
-
-```bash
-npm install
-npm run dev
+```
+src/
+  app/[locale]/        pages for uk / en / pl (all statically generated)
+  app/fonts/           Onest variable font, subset to Latin, Polish and Cyrillic (OFL)
+  proxy.ts             redirects unprefixed paths by Accept-Language (x-default: /en)
+  i18n/                locale config and typed dictionaries (en.ts is the schema)
+  content/             all site content in three languages, typed in types.ts
+  components/          UI; components read design tokens only (globals.css)
+public/cv/             CV PDFs (UA / EN / PL)
 ```
 
-Type-check:
+## Content rules
 
-```bash
-npm run typecheck
-```
+All facts live in `src/content`. A missing fact is written as `todo('...')`: it shows as a yellow
+marker in development, is hidden in production, and `npm run check:todo` lists every one left.
 
-Production build:
+## Scripts
 
-```bash
-npm run build
-```
-
-## Font
-
-The intro expects `public/fonts/helvetiker_bold.typeface.json`. The original font asset was not included in the uploaded source files, so the engine first tries the local path and then falls back to the Three.js hosted copy. For a fully self-contained/offline deploy, add the original JSON font file to that local path.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm run typecheck` | TypeScript, including missing translation keys |
+| `npm run lint` | ESLint |
+| `npm run check:todo` | Lists unfilled content |

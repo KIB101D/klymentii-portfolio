@@ -1,29 +1,30 @@
 {
   "name": "klymentii-portfolio",
   "private": true,
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "preview": "vite preview",
-    "typecheck": "tsc -b"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "check:todo": "node scripts/check-todo.mjs"
   },
   "dependencies": {
-    "camera-controls": "3.1.2",
-    "gsap": "3.15.0",
-    "react": "19.2.8",
-    "react-dom": "19.2.8",
-    "three": "0.185.1"
+    "@vercel/analytics": "2.0.1",
+    "next": "16.4.3",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "4.3.3",
-    "@types/react": "19.2.17",
+    "@tailwindcss/postcss": "4.3.3",
+    "@types/node": "22.19.1",
+    "@types/react": "19.3.0",
     "@types/react-dom": "19.2.3",
-    "@types/three": "0.185.1",
-    "@vitejs/plugin-react": "6.0.4",
-    "typescript": "7.0.2",
-    "vite": "8.2.0",
-    "tailwindcss": "4.3.3"
+    "eslint": "9.39.1",
+    "eslint-config-next": "16.4.3",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.9.3"
   }
 }
