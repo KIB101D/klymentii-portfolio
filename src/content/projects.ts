@@ -37,7 +37,7 @@ export const projects: Projects = [
     },
     stack: ['Next.js 16', 'TypeScript', 'PostgreSQL', 'Drizzle', 'Tailwind CSS'],
     links: {
-      demo: 'https://casacast-demo.vercel.app',
+      demo: 'https://casacast-demo-gamma.vercel.app/',
       demoNote: {
         uk: 'Адмінка: /login, кнопка «Try the demo».',
         en: 'Back office: /login, then “Try the demo”.',
