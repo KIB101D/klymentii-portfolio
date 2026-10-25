@@ -2,69 +2,28 @@
 export const en = {
   meta: {
     title: 'Klymentii Boiko, Frontend / Product Engineer',
-    description:
-      'Frontend developer who takes products from idea and brief to production. Case studies: Casacast, LOOP, Canopy Configurator, Ekonom, ReactShop.',
+    description: 'Projects by Klymentii Boiko: Casacast, LOOP, Canopy Configurator, Ekonom, ReactShop.',
   },
   nav: {
     skip: 'Skip to content',
-    main: 'Main',
-    work: 'Work',
-    services: 'What I do',
-    experience: 'Experience',
-    business: 'For businesses',
-    contact: 'Contact',
     language: 'Language',
     themeToDark: 'Switch to dark theme',
     themeToLight: 'Switch to light theme',
   },
-  hero: {
-    ctaProjects: 'See projects',
-    ctaCv: 'Download CV',
-    ctaContact: 'Contact me',
+  home: {
+    heading: 'Projects',
   },
-  work: {
-    heading: 'Selected work',
+  project: {
     labels: {
       freelance: 'Freelance',
       'test-task-product': 'Test task → product',
       pet: 'Pet project',
     },
+    back: 'All projects',
+    demo: 'Live demo',
+    github: 'GitHub',
     stack: 'Stack',
-    live: 'Live demo',
-    caseStudy: 'Case study',
-    github: 'GitHub',
     opensInNewTab: 'opens in a new tab',
-  },
-  services: {
-    heading: 'What I do',
-    proof: 'See it in',
-  },
-  experience: {
-    heading: 'Experience',
-    present: 'present',
-  },
-  business: {
-    heading: 'For businesses',
-    proof: 'Example',
-    cta: 'Discuss your project',
-  },
-  contact: {
-    heading: 'Contact',
-    lead: 'The fastest way to reach me is email.',
-    email: 'Email',
-    linkedin: 'LinkedIn',
-    github: 'GitHub',
-    telegram: 'Telegram',
-    cvHeading: 'CV',
-    cv: {
-      uk: 'Ukrainian',
-      en: 'English',
-      pl: 'Polish',
-    },
-    pdf: 'PDF',
-  },
-  footer: {
-    rights: 'Klymentii Boiko',
   },
 };
 

@@ -2,14 +2,12 @@
 
 /*
  * Design tokens. Components read these through the Tailwind theme below or var(), never raw values.
- * Direction: a product-photography studio. Cool grey sweep, graphite ink, one cobalt accent.
+ * Cool grey paper, graphite ink, one cobalt accent.
  */
 :root {
   color-scheme: light;
   --paper: #edeff1;
   --paper-raised: #f7f8f9;
-  --sweep-light: #ffffff;
-  --sweep-dark: #dde1e5;
   --ink: #1b1e22;
   --ink-muted: #545d68;
   --line: #c9ced4;
@@ -18,8 +16,6 @@
   --accent-ink: #ffffff;
   --accent-soft: #dfe5fb;
   --focus: #2547d0;
-  --todo-bg: #fff1b8;
-  --todo-ink: #5c4400;
 
   --sticker-face: #404040;
   --sticker-stroke: #171717;
@@ -38,8 +34,6 @@
     color-scheme: dark;
     --paper: #131518;
     --paper-raised: #1b1e22;
-    --sweep-light: #2a2e33;
-    --sweep-dark: #16181b;
     --ink: #e9ecef;
     --ink-muted: #a0a8b2;
     --line: #2f343a;
@@ -48,8 +42,6 @@
     --accent-ink: #0d1330;
     --accent-soft: #1f2849;
     --focus: #93a8ff;
-    --todo-bg: #4a3a05;
-    --todo-ink: #ffe28a;
     --sticker-face: #d4d8dd;
     --sticker-stroke: #050607;
     --sticker-depth: #000000;
@@ -60,8 +52,6 @@
   color-scheme: dark;
   --paper: #131518;
   --paper-raised: #1b1e22;
-  --sweep-light: #2a2e33;
-  --sweep-dark: #16181b;
   --ink: #e9ecef;
   --ink-muted: #a0a8b2;
   --line: #2f343a;
@@ -70,8 +60,6 @@
   --accent-ink: #0d1330;
   --accent-soft: #1f2849;
   --focus: #93a8ff;
-  --todo-bg: #4a3a05;
-  --todo-ink: #ffe28a;
   --sticker-face: #d4d8dd;
   --sticker-stroke: #050607;
   --sticker-depth: #000000;
@@ -112,7 +100,6 @@
     background: var(--paper);
     color: var(--ink);
     -webkit-text-size-adjust: 100%;
-    scroll-padding-top: 5rem;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -167,12 +154,12 @@
     letter-spacing: -0.025em;
   }
 
-  /* The name as a sticker slapped onto the page. The 3D intro lands exactly on this element. */
+  /* The name as a sticker slapped onto the page. */
   .sticker {
     display: inline-block;
     font-family: 'Arial Black', var(--font-onest), Impact, sans-serif;
     font-weight: 900;
-    font-size: clamp(3.25rem, 1.4rem + 8.6vw, 9.5rem);
+    font-size: clamp(3rem, 1.6rem + 6.4vw, 7rem);
     line-height: 0.82;
     letter-spacing: -0.06em;
     color: var(--sticker-face);
@@ -191,30 +178,6 @@
 
   .sticker-line {
     display: block;
-  }
-
-  /* Studio sweep: the backdrop every project object is photographed on. */
-  .stage {
-    position: relative;
-    aspect-ratio: 4 / 3;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background:
-      radial-gradient(120% 90% at 50% 38%, var(--sweep-light) 0%, var(--sweep-dark) 78%),
-      var(--sweep-dark);
-  }
-
-  .stage::after {
-    /* Soft contact shadow where objects will sit. */
-    content: '';
-    position: absolute;
-    left: 22%;
-    right: 22%;
-    bottom: 18%;
-    height: 9%;
-    border-radius: 50%;
-    background: radial-gradient(closest-side, rgb(0 0 0 / 0.16), transparent);
-    pointer-events: none;
   }
 
   .chip {
@@ -273,15 +236,6 @@
     text-decoration-thickness: 2px;
   }
 
-  .todo {
-    display: inline-block;
-    background: var(--todo-bg);
-    color: var(--todo-ink);
-    border-radius: var(--radius-sm);
-    padding: 0 0.375rem;
-    font-size: var(--text-xs);
-    font-weight: 600;
-  }
 
   /* Elements that need JS to do anything stay hidden without it. */
   .js-only {

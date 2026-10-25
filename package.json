@@ -8,8 +8,7 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint .",
-    "check:todo": "node scripts/check-todo.mjs"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@vercel/analytics": "2.0.1",

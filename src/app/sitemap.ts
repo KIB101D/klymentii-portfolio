@@ -1,16 +1,17 @@
 import type { MetadataRoute } from 'next';
-import { alternatesFor, defaultLocale, locales, siteUrl } from '@/i18n/config';
+import { alternatesFor, locales, siteUrl } from '@/i18n/config';
+import { projectSlugs } from '@/content/projects';
 
-/** Home in every locale with hreflang alternates. Case studies are added with their pages. */
+/** Home and every project page in each locale, with hreflang alternates. */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const paths = [''];
+  const paths = ['', ...projectSlugs.map((slug) => `/work/${slug}`)];
   return paths.flatMap((path) =>
     locales.map((locale) => {
       const { languages } = alternatesFor(locale, path);
       return {
         url: `${siteUrl}/${locale}${path}`,
         changeFrequency: 'monthly' as const,
-        priority: path === '' ? (locale === defaultLocale ? 1 : 0.9) : 0.8,
+        priority: path === '' ? 1 : 0.8,
         alternates: {
           languages: Object.fromEntries(Object.entries(languages).map(([k, v]) => [k, `${siteUrl}${v}`])),
         },
