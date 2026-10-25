@@ -1,42 +1,31 @@
-# Klymentii Portfolio — Vite + React + TypeScript + Tailwind CSS
+# klymentii-portfolio
 
-Merged portfolio with a persistent Three.js / GSAP intro layer and the interactive portfolio board above it.
+Portfolio of Klymentii Boiko, Frontend / Product Engineer: five projects, each with its own page,
+in Ukrainian, English and Polish.
+Live: https://klymentii-portfolio.vercel.app
 
-## Demo
+## Stack
 
-[Link](https://klymentii-portfolio.vercel.app/)
+Next.js 16 (App Router, fully static) · TypeScript strict · Tailwind CSS 4 · Vercel Analytics.
 
-## What is included
+## Structure
 
-- Three.js + GSAP intro moved into an imperative engine factory with closure state.
-- Render RAF runs during the intro and stops after the final sticker impact.
-- `IntroScene` uses a stable `useEffect(..., [])` lifecycle for the engine while its DOM remains mounted as the visual base layer.
-- Intro can be skipped with click, Enter, or Escape.
-- `sessionStorage` remembers that the intro has been seen for the current browser session.
-- Final CSS sticker stays visible underneath the Board.
-- Old CSS-only intro, old watermark, Replay button, and debug UI were removed.
-- Board is localized with EN as the default and UA / PL as persistent language options. The locale is stored in `localStorage`.
-- Recommendations UI is present for StudentsAbroad and DMA with EN / UA document slots. No recommendation text or fake documents were invented because the original letters were not included among the provided source files.
-
-## Run
-
-```bash
-npm install
-npm run dev
+```
+src/
+  app/[locale]/              home: name and the project list
+  app/[locale]/work/[slug]/  project page: description, stack, demo and GitHub links
+  proxy.ts                   redirects unprefixed paths by Accept-Language (x-default: /en)
+  i18n/                      locale config and typed dictionaries (en.ts is the schema)
+  content/projects.ts        all project texts in three languages
 ```
 
-Type-check:
+To change a project, edit `src/content/projects.ts`. A missing translation is a type error.
 
-```bash
-npm run typecheck
-```
+## Scripts
 
-Production build:
-
-```bash
-npm run build
-```
-
-## Font
-
-The intro expects `public/fonts/helvetiker_bold.typeface.json`. The original font asset was not included in the uploaded source files, so the engine first tries the local path and then falls back to the Three.js hosted copy. For a fully self-contained/offline deploy, add the original JSON font file to that local path.
+| Command | What it does |
+| --- | --- |
+| `npm run dev` | Development server |
+| `npm run build` | Production build |
+| `npm run typecheck` | TypeScript, including missing translation keys |
+| `npm run lint` | ESLint |
