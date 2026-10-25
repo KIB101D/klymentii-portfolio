@@ -235,35 +235,4 @@
   .link:hover {
     text-decoration-thickness: 2px;
   }
-
-
-  /* Elements that need JS to do anything stay hidden without it. */
-  .js-only {
-    display: none !important;
-  }
-
-  .js .js-only {
-    display: inline-flex !important;
-  }
-
-  .theme-icon-dark {
-    display: none;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) .theme-icon-light {
-      display: none;
-    }
-    :root:not([data-theme='light']) .theme-icon-dark {
-      display: block;
-    }
-  }
-
-  :root[data-theme='dark'] .theme-icon-light {
-    display: none;
-  }
-
-  :root[data-theme='dark'] .theme-icon-dark {
-    display: block;
-  }
 }

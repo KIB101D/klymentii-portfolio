@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { Analytics } from '@vercel/analytics/next';
 import { alternatesFor, isLocale, localeTags, locales, siteUrl } from '@/i18n/config';
 import { getDictionary } from '@/i18n/dictionaries';
+import { InlineScript } from '@/components/InlineScript';
 import '../globals.css';
 
 const onest = localFont({
@@ -15,8 +16,8 @@ const onest = localFont({
   adjustFontFallback: 'Arial',
 });
 
-/** Runs before first paint: stored theme wins over the system preference; marks JS as available. */
-const bootScript = `(function(){var d=document.documentElement;d.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')d.dataset.theme=t;}catch(e){}})();`;
+/** Runs before first paint, so a theme chosen with the toggle wins over the system preference without a flash. */
+const themeScript = `try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}`;
 
 export const dynamicParams = false;
 
@@ -55,9 +56,9 @@ export default async function LocaleLayout({ children, params }: LayoutProps<'/[
   if (!isLocale(locale)) notFound();
 
   return (
-    <html lang={localeTags[locale]} className={onest.variable} suppressHydrationWarning>
+    <html lang={localeTags[locale]} className={onest.variable} data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: bootScript }} />
+        <InlineScript html={themeScript} />
       </head>
       <body className="min-h-dvh bg-paper text-ink antialiased">
         {children}
